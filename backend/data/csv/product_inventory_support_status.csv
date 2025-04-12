@@ -1,0 +1,6 @@
+ProductID,ProductName,Version,EndOfSupportDate,SupportLevel,DocumentationLink
+PROD-A1,"Widget Pro",2.1,2025-12-31,Full,"docs.example.com/widgetpro"
+PROD-A2,"Widget Lite",1.5,2024-06-30,Limited,"docs.example.com/widgetlite"
+PROD-B1,"Service Module X",3.0,,Full,"docs.example.com/servicex"
+PROD-C3,"Legacy Tool Z",1.0,2023-01-01,None,"archive.example.com/toolz"
+PROD-A1,"Widget Pro",2.0,2025-12-31,Full,"docs.example.com/widgetpro/v2"

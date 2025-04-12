@@ -1,0 +1,5 @@
+AgentName,Email,PhoneExtension,Specialization,Shift
+"Smith, John",jsmith@example.com,101,"Tier 1, Login Issues","Mon-Fri 9-5 EST"
+"Jones, Priya",pjones@example.com,102,"Tier 2, Billing","Mon-Fri 9-5 EST"
+"Chen, Lee",lchen@example.com,103,"Tier 1, Installation","Tue-Sat 12-8 PM EST"
+"Davis, Maria",mdavis@example.com,104,"Tier 2, API Support","Mon-Fri 10-6 EST"

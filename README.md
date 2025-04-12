@@ -1,73 +1,113 @@
-# Welcome to your Lovable project
+# Intel Support Lens Dashboard
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/37d51429-b10e-48b6-9574-25562626e0b9
+The Intel Support Lens Dashboard is a comprehensive knowledge base solution designed for internal support teams. It combines semantic search technology with advanced LLM capabilities to provide instant, accurate answers to support questions based on your organization's documentation.
 
-## How can I edit this code?
+This application helps support agents quickly find information and respond to customer inquiries without having to manually search through extensive documentation. The system keeps track of documents, provides analytics on usage patterns, and continuously improves through interaction data.
 
-There are several ways of editing your application.
+## Key Features
 
-**Use Lovable**
+- **AI-powered Question Answering**: Get contextually relevant answers based on support documentation
+- **Semantic Document Search**: Find documents by meaning, not just keywords
+- **Document Management**: Upload and manage support documentation
+- **Analytics Dashboard**: Track system usage and performance metrics
+- **Citation Tracking**: All responses include source citations for verification
+- **Multi-format Support**: Handle Markdown, CSV, and plain text documents
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/37d51429-b10e-48b6-9574-25562626e0b9) and start prompting.
+## System Architecture
 
-Changes made via Lovable will be committed automatically to this repo.
+The application is built with a modern stack:
 
-**Use your preferred IDE**
+- **Backend**: FastAPI + PostgreSQL (with pgvector) + LlamaIndex + Google Gemini
+- **Frontend**: React + TypeScript + TailwindCSS + shadcn/ui
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- Python 3.9+
+- Node.js 18+
+- PostgreSQL with pgvector extension
+- Google API key for Gemini
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Environment Setup
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Clone this repository
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+git clone https://github.com/yourusername/intel-support-lens-dashboard.git
+cd intel-support-lens-dashboard
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Set up backend environment
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. Create a `.env` file in the backend directory with the following variables:
+
+```
+GOOGLE_API_KEY=your_google_api_key
+CONNECTION_STRING=postgresql://username:password@localhost:5432
+DB_NAME=intel_support_lens
+TEMP_DIR=./tmp
+MONGO_URI=mongodb://localhost:27017/ # modify for your MongoDB instance
+```
+
+4. Set up the frontend environment
+
+```bash
+cd ../frontend
+npm install
+```
+
+### Running the Application
+
+1. Start the backend server
+
+```bash
+cd backend
+python -m uvicorn app:app --reload
+```
+
+2. In a separate terminal, start the frontend development server
+
+```bash
+cd frontend
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+3. Access the application at http://localhost:8080
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Initial Data Setup
 
-**Use GitHub Codespaces**
+1. Use the document upload feature to add your initial support documentation
+2. The system will process and index the documents automatically
+3. Start using the chat interface to query your knowledge base
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deployment Considerations
 
-## What technologies are used for this project?
+For production deployment:
 
-This project is built with:
+- Use a production WSGI server like Gunicorn
+- Set up proper database connection pooling
+- Configure CORS settings appropriately
+- Implement authentication and authorization
+- Consider containerizing the application with Docker
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Performance
 
-## How can I deploy this project?
+The application has been load tested with Locust and can handle multiple simultaneous users with reasonable response times. For large document collections, consider scaling the database and optimizing vector search parameters.
 
-Simply open [Lovable](https://lovable.dev/projects/37d51429-b10e-48b6-9574-25562626e0b9) and click on Share -> Publish.
+## Future Enhancements
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Integration with ticketing systems
+- Support for more document formats
+- Advanced analytics and reporting
+- User feedback collection for response quality
+- Fine-tuning capabilities for domain-specific terminology

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, TooltipProps } from "recharts";
@@ -30,13 +29,12 @@ const TopQueriedDocuments = () => {
 
   // Shorten document names for display
   const formattedData = data.map(item => {
-    const parts = item.document.split('/');
+    const parts = item.file_path.split('\\tmp\\');
     return {
       ...item,
       displayName: parts[parts.length - 1].length > 20 
         ? parts[parts.length - 1].substring(0, 20) + '...' 
         : parts[parts.length - 1],
-      fullName: item.document
     };
   });
 
@@ -44,7 +42,7 @@ const TopQueriedDocuments = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-2 border rounded shadow-sm text-xs">
-          <p className="font-medium text-wrap max-w-[200px]">{payload[0].payload.fullName}</p>
+          <p className="font-medium text-wrap max-w-[200px]">{payload[0].payload.displayName}</p>
           <p>Count: {payload[0].value}</p>
         </div>
       );

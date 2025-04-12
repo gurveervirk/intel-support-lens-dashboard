@@ -1,0 +1,198 @@
+{
+    "info": {
+        "_postman_id": "5ae1e557-a75e-40fe-a02f-c2eaf8509991",
+        "name": "zeta-assessment-2-2025-project-2",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Metrics",
+            "item": [
+                {
+                    "name": "Fetch LLM response metrics",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:8000/llm-response-metrics/",
+                            "path": [
+                                "llm-response-metrics"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000"
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Fetch Query Log Volume",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/query-log-volume/",
+                            "path": [
+                                "query-log-volume"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000"
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "Fetch Top queried documents",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:8000/top-queried-documents/",
+                            "path": [
+                                "top-queried-documents"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000"
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"k\": 10\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Fetch query logs",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8000/query-logs/",
+                    "path": [
+                        "query-logs"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"include_citations\": true\n}"
+                }
+            }
+        },
+        {
+            "name": "query",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8000/query/",
+                    "path": [
+                        "query"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"query\": \"How should a good support response style look like?\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Document Search",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8000/top-similar-documents/",
+                    "path": [
+                        "top-similar-documents"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"k\": 5,\n  \"query\": \"support agent response style\" \n}"
+                }
+            }
+        }
+    ]
+}

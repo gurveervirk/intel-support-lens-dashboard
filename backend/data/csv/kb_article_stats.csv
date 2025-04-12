@@ -1,0 +1,6 @@
+ArticleID,Title,ViewsLast30Days,HelpfulVotes,NotHelpfulVotes,LastUpdated
+KB001,"How to Reset Password",1502,120,5,2023-09-15
+KB002,"Setting Up Two-Factor Auth",850,95,2,2023-10-01
+KB003,"Troubleshooting Connection Errors",1120,75,15,2023-08-20
+KB004,"Exporting Data Guide",530,50,1,2023-07-11
+KB005,"Understanding Your Invoice",980,110,8,2023-10-10

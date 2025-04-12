@@ -1,0 +1,6 @@
+TicketID,DateOpened,CustomerEmail,Subject,Status,Priority,AgentAssigned
+TKT-001,2023-10-26,customer1@email.com,"Cannot Login",Open,High,Agent Smith
+TKT-002,2023-10-26,customer2@email.com,"Feature Request: Dark Mode",Open,Low,
+TKT-003,2023-10-25,customer3@email.com,"Billing Inquiry",Resolved,Medium,Agent Jones
+TKT-004,2023-10-25,customer1@email.com,"Follow up on TKT-001",Open,High,Agent Smith
+TKT-005,2023-10-27,customer4@email.com,"Installation Error",Open,High,

@@ -1,29 +1,34 @@
-
 import { toast } from "sonner";
 
 const API_BASE_URL = "http://localhost:8000";
 
 // API Response Types
 export interface QueryLogVolume {
-  date: string;
-  count: number;
+  daily_count: number;
+  weekly_count: number;
+  monthly_count: number;
 }
 
 export interface LLMResponseMetrics {
-  average_latency: number;
+  avg_latency: number;
   success_rate: number;
 }
 
 export interface TopQueriedDocument {
-  document: string;
+  file_path: string;
   count: number;
 }
 
 export interface CitedDocument {
   file_path: string;
-  node_id: string;
+  content: string;
   score: number;
-  query_log_id: number;
+}
+
+export interface TopSimilarDocument {
+  file_path: string;
+  score: number;
+  content: string;
 }
 
 export interface QueryLog {
@@ -34,16 +39,16 @@ export interface QueryLog {
   success: boolean;
   error: string | null;
   timestamp: string;
-  cited_documents: CitedDocument[];
+  citations: CitedDocument[];
 }
 
 export interface ChatResponse {
   response: string;
-  cited_documents: CitedDocument[];
+  citations: CitedDocument[];
 }
 
 // API Calls
-export const fetchQueryLogVolume = async (): Promise<QueryLogVolume[]> => {
+export const fetchQueryLogVolume = async (): Promise<QueryLogVolume> => {
   try {
     const response = await fetch(`${API_BASE_URL}/query-log-volume/`);
     if (!response.ok) {
@@ -53,27 +58,59 @@ export const fetchQueryLogVolume = async (): Promise<QueryLogVolume[]> => {
   } catch (error) {
     console.error("Error fetching query log volume:", error);
     toast.error("Failed to fetch query volume data");
-    return [];
+    return {
+      daily_count: 0,
+      weekly_count: 0,
+      monthly_count: 0,
+    };
   }
 };
 
-export const fetchLLMResponseMetrics = async (): Promise<LLMResponseMetrics> => {
+export const fetchLLMResponseMetrics = async (period: 'day' | 'week' | 'month'): Promise<LLMResponseMetrics> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/llm-response-metrics/`);
+    let url = `${API_BASE_URL}/llm-response-metrics/`;
+    let body: string | undefined = undefined;
+
+    const startDate = new Date();
+    if (period === 'day') {
+      startDate.setDate(startDate.getDate() - 1);
+    } else if (period === 'week') {
+      startDate.setDate(startDate.getDate() - 7);
+    } else if (period === 'month') {
+      startDate.setDate(startDate.getDate() - 30);
+    }
+    body = JSON.stringify({ start_date: startDate.toISOString().split('T')[0] });
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    });
+
     if (!response.ok) {
       throw new Error(`Error fetching LLM metrics: ${response.statusText}`);
     }
+
     return await response.json();
   } catch (error) {
     console.error("Error fetching LLM metrics:", error);
     toast.error("Failed to fetch LLM metrics data");
-    return { average_latency: 0, success_rate: 0 };
+    return { avg_latency: 0, success_rate: 0 };
   }
 };
 
 export const fetchTopQueriedDocuments = async (): Promise<TopQueriedDocument[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/top-queried-documents/`);
+    // Send k = 5 in a JSON body
+    const response = await fetch(`${API_BASE_URL}/top-queried-documents/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ k: 5 }),
+    });
     if (!response.ok) {
       throw new Error(`Error fetching top queried documents: ${response.statusText}`);
     }
@@ -85,9 +122,15 @@ export const fetchTopQueriedDocuments = async (): Promise<TopQueriedDocument[]> 
   }
 };
 
-export const fetchQueryLogs = async (): Promise<QueryLog[]> => {
+export const fetchQueryLogs = async (include_citations: boolean = true, include_errors: boolean = true): Promise<QueryLog[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/query-logs/`);
+    const response = await fetch(`${API_BASE_URL}/query-logs/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ include_citations, include_errors }),
+    });
     if (!response.ok) {
       throw new Error(`Error fetching query logs: ${response.statusText}`);
     }
@@ -108,11 +151,11 @@ export const sendQuery = async (query: string): Promise<ChatResponse> => {
       },
       body: JSON.stringify({ query }),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error sending query: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Error sending query:", error);
@@ -142,5 +185,33 @@ export const uploadDocuments = async (files: File[]): Promise<void> => {
     console.error("Error uploading documents:", error);
     toast.error("Failed to upload documents");
     throw error;
+  }
+};
+
+export const fetchTopSimilarDocuments = async (query: string, k: number = 5): Promise<TopSimilarDocument[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/top-similar-documents/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, k }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching similar documents: ${response.statusText}`);
+    }
+
+    const documents = await response.json();
+
+    // Process file paths to make them cleaner
+    return documents.map((doc: TopSimilarDocument) => ({
+      ...doc,
+      file_path: doc.file_path.split('\\tmp\\').pop() || doc.file_path,
+    }));
+  } catch (error) {
+    console.error("Error fetching similar documents:", error);
+    toast.error("Failed to fetch similar documents");
+    return [];
   }
 };

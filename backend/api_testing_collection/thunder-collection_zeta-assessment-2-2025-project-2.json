@@ -1,0 +1,146 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "zeta-assessment-2-2025-project-2",
+    "collectionId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+    "dateExported": "2025-04-12T06:40:04.724Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "11b2bc97-35d8-45cf-90e7-524c704a6ad1",
+            "name": "Metrics",
+            "containerId": "",
+            "created": "2025-04-11T08:07:04.988Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "2220024d-3cb5-471b-ba49-b43bee5ce5a9",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "11b2bc97-35d8-45cf-90e7-524c704a6ad1",
+            "name": "Fetch LLM response metrics",
+            "url": "http://localhost:8000/llm-response-metrics/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-04-11T08:07:13.585Z",
+            "modified": "2025-04-11T16:29:05.925Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "0a9d3bdb-1073-4b73-a8c1-32160f0dec0a",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "11b2bc97-35d8-45cf-90e7-524c704a6ad1",
+            "name": "Fetch Query Log Volume",
+            "url": "http://localhost:8000/query-log-volume/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2025-04-11T08:15:10.873Z",
+            "modified": "2025-04-11T16:29:27.515Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "f7c4461d-f9f2-4980-b591-d8900d8b4e4f",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "11b2bc97-35d8-45cf-90e7-524c704a6ad1",
+            "name": "Fetch Top queried documents",
+            "url": "http://localhost:8000/top-queried-documents/",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-04-11T08:37:43.017Z",
+            "modified": "2025-04-11T16:29:34.538Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"k\": 10\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "61bc4215-68f5-4ab2-b276-5c87c1942d31",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "",
+            "name": "Fetch query logs",
+            "url": "http://localhost:8000/query-logs/",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-04-11T09:20:48.660Z",
+            "modified": "2025-04-11T16:29:51.707Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"include_citations\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "5ae6642f-aa65-4136-b9e1-d0f9a3220dc1",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "",
+            "name": "query",
+            "url": "http://localhost:8000/query/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2025-04-11T07:40:25.710Z",
+            "modified": "2025-04-11T09:07:41.576Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"query\": \"How should a good support response style look like?\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8437cedb-07fd-4f4d-8406-3c5a93800ffd",
+            "colId": "10f56f98-f72a-4529-92c1-7bb7b7c89683",
+            "containerId": "",
+            "name": "Document Search",
+            "url": "http://localhost:8000/top-similar-documents/",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2025-04-12T06:04:23.433Z",
+            "modified": "2025-04-12T06:06:01.250Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"k\": 5,\n  \"query\": \"support agent response style\" \n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "2J9l04AHuObX1DobTwhGWq5K9SM42P-qaq0mCK0JOB19Dv_JC3t8hfaG8PCvu5wuHjXJ9X773oPpsjS858duvA"
+}

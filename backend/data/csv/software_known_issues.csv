@@ -1,0 +1,6 @@
+IssueID,Product,VersionAffected,Severity,Status,Description,Workaround
+BUG-101,"App Suite",3.1.x,High,Open,"Crash on opening large projects","Split project into smaller parts"
+BUG-102,"Web Portal",All,Medium,Investigating,"Slow loading of dashboard widgets","Refresh page or clear cache"
+BUG-103,"App Suite",3.0.x,Low,Resolved (in 3.1),"Typo in settings menu","Upgrade to version 3.1 or later"
+BUG-104,"API",v2,High,Open,"Rate limit calculation incorrect","Monitor usage closely, contact support if blocked"
+BUG-105,"Web Portal",All,Low,Documented,"Session timeout occurs after 15 mins inactive","Save work frequently"
