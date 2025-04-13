@@ -36,7 +36,7 @@ The application is built with a modern stack:
 1. Clone this repository
 
 ```bash
-git clone https://github.com/yourusername/intel-support-lens-dashboard.git
+git clone https://github.com/gurveervirk/intel-support-lens-dashboard.git
 cd intel-support-lens-dashboard
 ```
 
