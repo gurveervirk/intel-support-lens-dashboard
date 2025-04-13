@@ -9,6 +9,7 @@ The Intel Support Lens Dashboard backend provides a robust API service that powe
 - **FastAPI**: Modern, high-performance web framework for building APIs
 - **SQLAlchemy**: SQL toolkit and ORM for database operations
 - **PostgreSQL with pgvector**: Vector database for storing document embeddings
+- **MongoDB**: NoSQL database for storing documents, and for checking for changes in the documents, when upserting them
 - **LlamaIndex**: Framework for connecting custom data to LLMs
 - **Google Gemini**: LLM provider for generating responses
 - **Google Text Embedding**: Embedding model for vector representations
@@ -21,11 +22,12 @@ The Intel Support Lens Dashboard backend provides a robust API service that powe
 The backend implements a sophisticated document ingestion pipeline:
 
 1. **Document Upload**: API endpoint accepts multiple document formats (PDF, Markdown, CSV)
-2. **Text Extraction**: Documents are processed to extract plain text
-3. **Text Chunking**: Long documents are split into semantically meaningful chunks
-4. **Embedding Generation**: Each chunk is converted to vector embeddings
-5. **Vector Storage**: Embeddings are stored in PostgreSQL using pgvector extension
-6. **Metadata Management**: Document metadata is preserved for retrieval
+2. **Document Changes Inspection**: MongoDB is used to check for changes in the documents before upserting them
+3. **Chunking**: Documents are split into smaller chunks for efficient processing
+4. **Embedding Generation**: Each chunk is converted into a vector representation using Google Text Embedding
+5. **Database Storage**: Chunks and their metadata are stored in PostgreSQL with pgvector for efficient vector search
+6. **Indexing**: Chunks are indexed for fast retrieval during query processing
+7. **Metadata Storage**: Metadata about the documents is stored in MongoDB for easy access and management
 
 ## API Endpoints
 
