@@ -35,7 +35,7 @@ class UserQuery(BaseModel):
     query: str
 
 class Timeframe(BaseModel):
-    start_date: Optional[date] = date.today()
+    start_date: Optional[date] = None
     end_date: Optional[date] = date.today()
 
 class TopKQuery(BaseModel):

@@ -133,10 +133,14 @@ async def get_top_queried_documents(query: TopKDocCiteQuery, db: Session = Depen
     if k is not None and k <= 0:
         raise HTTPException(status_code=400, detail="K must be a positive integer")
     
+    if start_date is None:
+        # If start_date is None, get all records up to end_date
+        start_date = date(1970, 1, 1)  # Use a very old date as the starting point
+    
     if end_date is not None and end_date < start_date:
         raise HTTPException(status_code=400, detail="End date must be greater than or equal to start date")
     if end_date is None:
-        end_date = start_date
+        end_date = date.today()
 
     # If k is None, return all documents
     query = db.query(CitedDocument.file_path, func.count(CitedDocument.file_path).label("count"))
@@ -179,6 +183,11 @@ async def get_llm_response_metrics(timeframe: Timeframe, db: Session = Depends(g
     """Get LLM response success rates and latency for a day or timeframe."""
     start_date = timeframe.start_date
     end_date = timeframe.end_date
+    
+    if start_date is None:
+        # If start_date is None, get all records up to end_date
+        start_date = date(1970, 1, 1)  # Use a very old date as the starting point
+        
     if end_date is not None and end_date < start_date:
         raise HTTPException(status_code=400, detail="End date must be greater than or equal to start date")
     if end_date is None:
@@ -238,10 +247,15 @@ async def get_query_logs(query: QueryLogInput, db: Session = Depends(get_db)):
 
     if k is not None and k <= 0:
         raise HTTPException(status_code=400, detail="K must be a positive integer")
+        
+    if start_date is None:
+        # If start_date is None, get all records up to end_date
+        start_date = date(1970, 1, 1)  # Use a very old date as the starting point
+        
     if end_date is not None and end_date < start_date:
         raise HTTPException(status_code=400, detail="End date must be greater than or equal to start date")
     if end_date is None:
-        end_date = start_date
+        end_date = date.today()
 
     logs = db.query(QueryLog).filter(
         QueryLog.timestamp >= start_date,
